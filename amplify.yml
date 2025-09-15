@@ -4,16 +4,20 @@ applications:
       phases:
         preBuild:
           commands:
-            # Install Flutter SDK
+            # Download and extract Flutter SDK
             - curl -O https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.24.0-stable.tar.xz
             - tar xf flutter_linux_3.24.0-stable.tar.xz
             - export PATH="$PATH:$PWD/flutter/bin"
+            # Enable Flutter web
             - flutter config --enable-web
+            # Install dependencies
             - flutter pub get
         build:
           commands:
+            # Build Flutter web app in release mode
             - flutter build web --release
       artifacts:
+        # Point Amplify to the web build output
         baseDirectory: build/web
         files:
           - '**/*'
