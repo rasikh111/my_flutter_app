@@ -4,9 +4,11 @@ applications:
       phases:
         preBuild:
           commands:
-            # Download and extract Flutter SDK (.tar.gz version)
-            - curl -O https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.35.0-stable.tar.gz
-            - tar -xzf flutter_linux_3.35.0-stable.tar.gz
+            # Install xz to extract Flutter SDK
+            - sudo dnf install -y xz
+            # Download and extract Flutter SDK
+            - curl -O https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.35.0-stable.tar.xz
+            - tar -xf flutter_linux_3.35.0-stable.tar.xz
             - export PATH="$PATH:$PWD/flutter/bin"
             # Enable Flutter web
             - flutter config --enable-web
